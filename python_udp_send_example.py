@@ -17,6 +17,7 @@ checksum = 42
 btime = struct.pack("<llLLLLLHcc",lat,lon,fix_age,t,date,speed,course,checksum,'\r','\r')
 
 UDP_IP = "karadras.ddns.net"
+# UDP_IP = "46.252.18.138"
 UDP_PORT = 1313
 MESSAGE = btime
 

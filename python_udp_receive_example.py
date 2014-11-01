@@ -12,20 +12,22 @@ try:
 	sock.bind((UDP_IP, UDP_PORT))
 	
 	while True:
-		data, addr = sock.recvfrom(18) # buffer size is 1024 bytes
+		datalen = 30
+		data, addr = sock.recvfrom(datalen) # buffer size is 1024 bytes
 		print("received: ",  data)
 		print(len(data))
-		message = struct.unpack("<llLLcc",data)
-		t = message[0]
-		latitude = message[1]
-		#nord = message[2]
-		#longitude = message[3]
-		#east = message[4]
-		#print("received message:", (t,latitude,nord,longitude,east), " - ", addr)
-		for i in range(len(message)-2):
-			print ':',
-			print message[i],
-		# print("received message:", (t,latitude), " - ", addr)
-		print ""
+		if len(data)==datalen:
+			message = struct.unpack("<llLLLLLh",data)
+			t = message[0]
+			latitude = message[1]
+			#nord = message[2]
+			#longitude = message[3]
+			#east = message[4]
+			#print("received message:", (t,latitude,nord,longitude,east), " - ", addr)
+			for i in range(len(message)):
+				print ':',
+				print message[i],
+			# print("received message:", (t,latitude), " - ", addr)
+			print ""
 finally:
 	sock.close()
